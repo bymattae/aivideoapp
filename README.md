@@ -1,15 +1,98 @@
-# Ansh & Riley Full-Stack Template
+# ReelsBuilder.ai Clone
 
-This is a full-stack template project for Software Composers to create  applications with AI.
+A full-stack application for generating professional motivational videos using free APIs and tools.
 
-## Getting started
-To create a new project, you go to `/paths`, choose from our list of Paths, and then use Cursor's Composer feature to quickly scaffold your project!
+## Features
 
-You can also edit the Path's prompt template to be whatever you like!
+- Generate voiceovers from text using gTTS (Google Text-to-Speech)
+- Fetch high-quality stock videos from Pexels API
+- Create vertical (9:16) videos optimized for TikTok/Reels
+- Add text overlays and transitions
+- Mobile-friendly interface
+- No login required
 
-## Technologies used
-This doesn't really matter, but is useful for the AI to understand more about this project. We are using the following technologies
-- React with Next.js 14 App Router
-- TailwindCSS
-- Firebase Auth, Storage, and Database
-- Multiple AI endpoints including OpenAI, Anthropic, and Replicate using Vercel's AI SDK
+## Tech Stack
+
+- Frontend: Next.js 14, React, Tailwind CSS
+- Backend: FastAPI (Python)
+- Video Processing: MoviePy
+- Text-to-Speech: gTTS
+- Stock Videos: Pexels API
+
+## Prerequisites
+
+- Node.js 18+
+- Python 3.8+
+- Pexels API key (free)
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd reelsbuilder-clone
+```
+
+2. Set up the frontend:
+```bash
+cd src/frontend
+npm install
+```
+
+3. Set up the backend:
+```bash
+cd ../backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+4. Create a `.env` file in the backend directory:
+```
+PEXELS_API_KEY=your_pexels_api_key
+```
+
+## Running the Application
+
+1. Start the backend server:
+```bash
+cd src/backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+python main.py
+```
+
+2. Start the frontend development server:
+```bash
+cd ../frontend
+npm run dev
+```
+
+3. Open your browser and navigate to `http://localhost:3000`
+
+## Usage
+
+1. Enter your motivational script (1-3 sentences)
+2. Select a vibe/keyword for the stock videos
+3. Click "Generate Video"
+4. Preview and download your video
+
+## API Endpoints
+
+- `POST /generate`: Generate a new video
+  - Body: `{ script: string, vibe: string }`
+  - Returns: `{ success: boolean, video_path: string }`
+
+- `GET /download/{video_path}`: Download the generated video
+  - Returns: Video file (MP4)
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
