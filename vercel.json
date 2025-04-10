@@ -19,5 +19,9 @@
       "src": "/(.*)",
       "dest": "src/frontend/$1"
     }
-  ]
+  ],
+  "env": {
+    "PEXELS_API_KEY": "cptxMJ08Mo1Tk2vD4h6RRIcie484qpjbJ5NEkwPpx1PClYEsH17HmVy0",
+    "NEXT_PUBLIC_API_URL": "https://aivideoapp.vercel.app/api"
+  }
 } 
