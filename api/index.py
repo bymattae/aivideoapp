@@ -1,8 +1,13 @@
-from http.server import BaseHTTPRequestHandler
-
-class handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
-        self.end_headers()
-        self.wfile.write('API is running'.encode()) 
+def handler(request):
+    """
+    Simple health check endpoint
+    """
+    if request.method == "GET":
+        return {
+            "statusCode": 200,
+            "body": "API is running"
+        }
+    return {
+        "statusCode": 405,
+        "body": "Method not allowed"
+    } 
