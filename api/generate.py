@@ -5,6 +5,7 @@ import requests
 import os
 import json
 import tempfile
+import base64
 from typing import Dict, Any
 
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY")
@@ -33,7 +34,7 @@ def fetch_stock_videos(keyword: str, count: int = 5) -> list:
     
     return video_urls
 
-async def handler(request):
+def handler(request):
     if request.method != 'POST':
         return {
             'statusCode': 405,
@@ -41,7 +42,7 @@ async def handler(request):
         }
     
     try:
-        body = await request.json()
+        body = json.loads(request.body)
         script = body.get('script')
         vibe = body.get('vibe')
         
@@ -96,9 +97,9 @@ async def handler(request):
             output_path = os.path.join(temp_dir, "final.mp4")
             final_video.write_videofile(output_path, fps=24)
             
-            # Read the video file
+            # Read the video file and encode as base64
             with open(output_path, 'rb') as f:
-                video_data = f.read()
+                video_data = base64.b64encode(f.read()).decode('utf-8')
             
             # Clean up
             for clip in clips:

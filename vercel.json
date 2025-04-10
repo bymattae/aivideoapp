@@ -2,26 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/frontend/package.json",
+      "src": "src/frontend/next.config.js",
       "use": "@vercel/next"
     },
     {
-      "src": "src/backend/main.py",
+      "src": "api/*.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "src/backend/main.py"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "src/frontend/$1"
+      "dest": "/src/frontend/$1"
     }
   ],
   "env": {
-    "PEXELS_API_KEY": "cptxMJ08Mo1Tk2vD4h6RRIcie484qpjbJ5NEkwPpx1PClYEsH17HmVy0",
-    "NEXT_PUBLIC_API_URL": "https://aivideoapp.vercel.app/api"
+    "PEXELS_API_KEY": "cptxMJ08Mo1Tk2vD4h6RRIcie484qpjbJ5NEkwPpx1PClYEsH17HmVy0"
   }
 } 
