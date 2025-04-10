@@ -19,7 +19,7 @@ const VIBE_OPTIONS = [
   'lifestyle'
 ];
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export default function Home() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -37,12 +37,14 @@ export default function Home() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
-      if (result.success) {
-        setVideoUrl(`${API_URL}/download/${encodeURIComponent(result.video_path)}`);
-      } else {
-        console.error('Failed to generate video');
+      if (!response.ok) {
+        throw new Error('Failed to generate video');
       }
+
+      // Create a blob URL from the video response
+      const videoBlob = await response.blob();
+      const videoUrl = URL.createObjectURL(videoBlob);
+      setVideoUrl(videoUrl);
     } catch (error) {
       console.error('Error:', error);
     } finally {
