@@ -6,18 +6,21 @@
       "use": "@vercel/next"
     },
     {
-      "src": "api/*.py",
-      "use": "@vercel/python"
+      "src": "api/generate.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "/api/generate",
+      "dest": "api/generate.py"
     },
     {
       "src": "/(.*)",
-      "dest": "/src/frontend/$1"
+      "dest": "src/frontend/$1"
     }
   ],
   "env": {
