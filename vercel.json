@@ -7,15 +7,13 @@
     },
     {
       "src": "api/*.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 60,
+        "memory": 3008
+      }
     }
   ],
-  "functions": {
-    "api/*.py": {
-      "memory": 3008,
-      "maxDuration": 60
-    }
-  },
   "routes": [
     {
       "src": "/api/generate",
